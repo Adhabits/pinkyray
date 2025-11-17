@@ -201,7 +201,7 @@
             transform: translateY(-2px);
         }
 
-        /* MODIFIED: Side-by-Side Stats Layout */
+        /* Side-by-Side Stats Layout */
         .hero-stats {
             display: grid;
             grid-template-columns: 1fr;
@@ -1026,7 +1026,7 @@
                 max-width: 100%;
             }
 
-            /* MODIFIED: Mobile stats layout */
+            /* Mobile stats layout */
             .hero-stats {
                 grid-template-columns: 1fr 1fr;
                 max-width: 300px;
@@ -1197,7 +1197,7 @@
                 </div>
                 <div class="hero-right fade-in-delay-2">
                     <div class="hero-image-container">
-                        <img src="https://i.postimg.cc/J0Yr936K/pinky.jpg" alt="Rukkya Khan - Trading Mentor" class="hero-image"/>
+                        <img src="https://i.postimg.cc/Bv2FWQrG/IMG-20251013-WA0116(4).jpg" alt="Rukkya Khan - Trading Mentor" class="hero-image"/>
                         <div class="image-overlay"></div>
                         <div class="floating-badge">
                             <i class="fas fa-crown"></i> Expert Mentor
@@ -1636,14 +1636,42 @@
                             </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label class="form-label">Phone Number *</label>
-                            <input type="tel" class="form-input" name="phone" required="" inputmode="tel"/>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-input" name="phone" required="" inputmode="tel"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">City *</label>
+                                <input type="text" class="form-input" name="city" required=""/>
+                            </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label">Email Address *</label>
-                            <input type="email" class="form-input" name="email" required=""/>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Age *</label>
+                                <input type="number" class="form-input" name="age" required="" min="18" max="100"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Profession *</label>
+                                <input type="text" class="form-input" name="profession" required=""/>
+                            </div>
+                        </div>
+
+                        <div class="form-radio-group">
+                            <label class="form-label">Gender</label>
+                            <label class="form-radio-label">
+                                <input type="radio" name="gender" value="Male"/>
+                                <span>Male</span>
+                            </label>
+                            <label class="form-radio-label">
+                                <input type="radio" name="gender" value="Female"/>
+                                <span>Female</span>
+                            </label>
+                            <label class="form-radio-label">
+                                <input type="radio" name="gender" value="Other"/>
+                                <span>Other</span>
+                            </label>
                         </div>
                         
                         <div class="form-radio-group">
@@ -1847,12 +1875,15 @@
                 firstName: formData.get('firstName'),
                 lastName: formData.get('lastName'),
                 phone: formData.get('phone'),
-                email: formData.get('email'),
+                city: formData.get('city'),
+                age: formData.get('age'),
+                profession: formData.get('profession'),
+                gender: formData.get('gender'),
                 trading: formData.get('trading')
             };
             
             // Validation
-            if (!data.firstName || !data.lastName || !data.phone || !data.email) {
+            if (!data.firstName || !data.lastName || !data.phone || !data.city || !data.age || !data.profession) {
                 alert('Please fill in all required fields.');
                 return;
             }
@@ -1863,13 +1894,7 @@
                 return;
             }
             
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email)) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-            
-            const message = `Hi Rukkya Mam,%0A%0AI would like to claim my FREE trial of the TeamUniversal trading course.%0A%0AName: ${encodeURIComponent(data.firstName + ' ' + data.lastName)}%0APhone: ${encodeURIComponent(data.phone)}%0AEmail: ${encodeURIComponent(data.email)}%0AExperience: ${encodeURIComponent(data.trading)}%0A%0APlease contact me to activate my free trial.`;
+            const message = `Hi Rukkya Mam,%0A%0AI would like to claim my FREE trial of the TeamUniversal trading course.%0A%0AName: ${encodeURIComponent(data.firstName + ' ' + data.lastName)}%0APhone: ${encodeURIComponent(data.phone)}%0ACity: ${encodeURIComponent(data.city)}%0AAge: ${encodeURIComponent(data.age)}%0AProfession: ${encodeURIComponent(data.profession)}%0AGender: ${encodeURIComponent(data.gender || 'Not specified')}%0AExperience: ${encodeURIComponent(data.trading)}%0A%0APlease contact me to activate my free trial.`;
             
             const whatsappUrl = `https://wa.me/917249960757?text=${message}`;
             

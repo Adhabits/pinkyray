@@ -7,6 +7,22 @@
     <title>TeamUniversal - Professional Trading Mastery</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1754991271721385');
+    fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
+
     <style>
         :root {
             --bg-primary: #0a0b0d;
@@ -1125,8 +1141,16 @@
             animation: pulse 1.5s infinite;
         }
     </style>
-<script src="https://statics.moonshot.cn/sdk/preview-widgets.min.js" defer=""></script></head>
+    <script src="https://statics.moonshot.cn/sdk/preview-widgets.min.js" defer=""></script>
+</head>
 <body>
+
+    <!-- Meta Pixel NoScript (for browsers with JS disabled) -->
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=1754991271721385&ev=PageView&noscript=1"/>
+    </noscript>
+
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress"></div>
 
@@ -1838,7 +1862,7 @@
             }
         }
 
-        // Form Submission
+        // Form Submission + Pixel Events
         document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1867,6 +1891,12 @@
             if (!emailRegex.test(data.email)) {
                 alert('Please enter a valid email address.');
                 return;
+            }
+
+            // ✅ Meta Pixel events on successful form submit (lead + contact)
+            if (typeof fbq === 'function') {
+                fbq('track', 'Lead');
+                fbq('track', 'Contact');
             }
             
             const message = `Hi Pinky Ray,%0A%0AI would like to claim my FREE trial of the TeamUniversal trading course.%0A%0AName: ${encodeURIComponent(data.firstName + ' ' + data.lastName)}%0APhone: ${encodeURIComponent(data.phone)}%0AEmail: ${encodeURIComponent(data.email)}%0AExperience: ${encodeURIComponent(data.trading)}%0A%0APlease contact me to activate my free trial.`;
@@ -1901,7 +1931,7 @@
                     entry.target.style.animationPlayState = 'running';
                     
                     // Trigger counter animation when stats section is visible
-                    if (entry.target.querySelector('.stat-number[data-count]')) {
+                    if (entry.target.querySelector && entry.target.querySelector('.stat-number[data-count]')) {
                         animateCounters();
                     }
                 }
@@ -1951,4 +1981,5 @@
         });
     </script>
 
-</body></html>
+</body>
+</html>
